@@ -237,6 +237,89 @@
 					</a>
 				</div>
 				<!-- end Column  8-->
+
+				<!-- Start Column 9-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/smartwatch.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">ID116 Plus Smart Fitness Smartwatch</h3>
+						<strong class="product-price">599.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  9-->
+
+				<!-- Start Column 10-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/torch.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">Multifunctional Work Portable LED Flashlight</h3>
+						<strong class="product-price">449.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  10-->
+
+
+				<!-- Start Column 11-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/sterering cover.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">New Carbon Fiber ABS Texture Steering Wheel Grip Cover for Cars</h3>
+						<strong class="product-price">694.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  11-->
+
+				<!-- Start Column 12-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/plastic.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">Rotating Faucet Extender Aerator, Universal Splash Filter Faucet, Large Angle Rotating Splash Filter Faucet Extender Aerator with 2 Water Outlet Modes, Sink Sprayer (All Plastic)</h3>
+						<strong class="product-price">799.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  12-->
+
+
+				<!-- Start Column 13-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/shoes.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title"> Trendy Mens Casual Shoes</h3>
+						<strong class="product-price">887.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  13-->
+
+				<!-- Start Column 14-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/cutter.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">  Titanium Coin Box Cutter/Knife + Multi Tool</h3>
+						<strong class="product-price">597.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  14-->
+
+				
+
 			</div>
 		</div>
 	</div>

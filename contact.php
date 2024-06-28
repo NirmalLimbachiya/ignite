@@ -58,11 +58,7 @@
 
         <div class="block">
           <div class="row justify-content-center">
-
-
             <div class="col-md-8 col-lg-8 pb-4">
-
-
               <div class="row mb-5">
                 <div class="col-lg-4">
                   <div  class="service no-shadow align-items-center link horizontal d-flex active" data-aos="fade-left" data-aos-delay="0">
@@ -104,7 +100,7 @@
                 </div>
               </div>
 
-              <form>
+              <form method="">
                 <div class="row">
                   <div class="col-6">
                     <div class="form-group">
