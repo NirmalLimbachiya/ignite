@@ -318,6 +318,59 @@
 				</div>
 				<!-- end Column  14-->
 
+
+				<!-- Start Column 15-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/car light.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">  Universal Flexible Car Led Hood Strip Lights (White Light)</h3>
+						<strong class="product-price">856.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  15-->
+
+				<!-- Start Column 16-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/shaver.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title"> Mini Electric Shaver for Men Washable Small Portable Razor Rechargeable USB Car Charging Dry Wet Use Easy Carry</h3>
+						<strong class="product-price">638.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  16-->
+
+				<!-- Start Column 17-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/vaccum.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">  Desktop Vacuum Cleaner</h3>
+						<strong class="product-price">798.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  17-->
+
+				<!-- Start Column 18-->
+				<div class="col-12 col-md-4 col-lg-3 mb-5">
+					<a class="product-item" href="#">
+						<img src="images/chappal.png" class="img-fluid product-thumbnail">
+						<h3 class="product-title">AM PM Genuine Leather Men's Daily Wear Slippers</h3>
+						<strong class="product-price">620.00</strong>
+						<span class="icon-cross">
+							<img src="images/cross.svg" class="img-fluid">
+						</span>
+					</a>
+				</div>
+				<!-- end Column  18-->
+
 				
 
 			</div>
