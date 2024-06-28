@@ -1,8 +1,4 @@
-Template Name: Furni
-Template Author: Untree.co
-Template License: https://creativecommons.org/licenses/by/3.0/
-Author URI: https://untree.co/
+Template Name: Findownn
+Template Author: Om Shah, Nirmal Limbachiya
 
-Twitter: https://twitter.com/Untree_co
-Facebook: https://web.facebook.com/Untree.co/
-Pinterest: https://pinterest.com/Untree_co/
+Canva Link1: https://www.canva.com/design/DAGJbQOVFrQ/MEwuhWMv9SlTkf0cmiIzwA/edit?utm_content=DAGJbQOVFrQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
