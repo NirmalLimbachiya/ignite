@@ -129,7 +129,7 @@
 
             <div class="col-lg-6 text-center text-lg-end">
               <ul class="list-unstyled d-inline-flex ms-auto">
-                <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+                <li class="me-4"><a href="terms.php">Terms &amp; Conditions</a></li>
                 <li><a href="#">Privacy Policy</a></li>
               </ul>
             </div>

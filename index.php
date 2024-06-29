@@ -45,8 +45,8 @@
               </p>
 
               <p>
-                <a href="#" class="btn btn-secondary me-2">Shop Now</a
-                ><a href="#" class="btn btn-white-outline">Explore</a>
+                <a href="shop.php" class="btn btn-secondary me-2">Shop Now</a
+                ><a href="#product-section" class="btn btn-white-outline">Explore</a>
               </p>
             </div>
           </div>
@@ -66,7 +66,7 @@
     <!-- End Hero Section -->
 
     <!-- Start Product Section -->
-    <div class="product-section">
+    <div class="product-section" id="product-section">
       <div class="container">
         <div class="row">
           <!-- Start Column 1 -->
@@ -75,7 +75,7 @@
             <p class="mb-4">
             Our products are crafted with excellent materials, ensuring durability, performance, and superior
             </p>
-            <p><a href="shop.html" class="btn">Explore</a></p>
+            <p><a href="shop.php" class="btn">Explore</a></p>
           </div>
           <!-- End Column 1 -->
 
@@ -219,7 +219,7 @@
           <div class="col-lg-5">
             <div class="img-wrap">
               <img
-                src="images/why-choose-us-img.jpg"
+                src="images/massager.png"
                 alt="Image"
                 class="img-fluid"
               />
@@ -237,32 +237,29 @@
           <div class="col-lg-7 mb-5 mb-lg-0">
             <div class="imgs-grid">
               <div class="grid grid-1">
-                <img src="images/img-grid-1.jpg" alt="Untree.co" />
-              </div>
-              <div class="grid grid-2">
-                <img src="images/img-grid-2.jpg" alt="Untree.co" />
-              </div>
-              <div class="grid grid-3">
-                <img src="images/img-grid-3.jpg" alt="Untree.co" />
+                <img src="images/face-pack.png" alt="findownn.com" />
+                </div>
+                <div class="grid grid-2">
+                  <img src="images/bags.png" alt="findownn.com" />
+                </div>
+                <div class="grid grid-3">
+                  <img src="images/premium-watch.png" alt="findownn.com" />
               </div>
             </div>
           </div>
           <div class="col-lg-5 ps-lg-5">
             <h2 class="section-title mb-4">
-              We Help You Make Modern Interior Design
+            We Help You Discover Unique and Trendy Products
             </h2>
             <p>
-              Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio
-              quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-              vulputate velit imperdiet dolor tempor tristique. Pellentesque
-              habitant morbi tristique senectus et netus et malesuada
+            At FindOwnn, we are dedicated to bringing you the latest trends and unique finds in fashion, accessories, and more. Our curated collection is designed to inspire and elevate your personal style.
             </p>
 
             <ul class="list-unstyled custom-list my-4">
-              <li>Donec vitae odio quis nisl dapibus malesuada</li>
-              <li>Donec vitae odio quis nisl dapibus malesuada</li>
-              <li>Donec vitae odio quis nisl dapibus malesuada</li>
-              <li>Donec vitae odio quis nisl dapibus malesuada</li>
+              <li>Explore our wide range of stylish clothing and accessories that cater to every occasion.</li>
+              <li>Enjoy a seamless shopping experience with our user-friendly website and dedicated customer service.</li>
+              <li>Discover high-quality products that blend fashion with functionality.</li>
+              <li>Join us at FindOwnn and elevate your style with our exclusive collections.</li>
             </ul>
             <p><a herf="#" class="btn">Explore</a></p>
           </div>
@@ -355,27 +352,21 @@
                       <div class="testimonial-block text-center">
                         <blockquote class="mb-5">
                           <p>
-                            &ldquo;Donec facilisis quam ut purus rutrum
-                            lobortis. Donec vitae odio quis nisl dapibus
-                            malesuada. Nullam ac aliquet velit. Aliquam
-                            vulputate velit imperdiet dolor tempor tristique.
-                            Pellentesque habitant morbi tristique senectus et
-                            netus et malesuada fames ac turpis egestas. Integer
-                            convallis volutpat dui quis scelerisque.&rdquo;
+                            &ldquo;FindOwnn has an amazing collection of fashion items. I found exactly what I was looking for, and the quality exceeded my expectations. The delivery was quick, and the customer service was very helpful. Highly recommended!&rdquo;
                           </p>
                         </blockquote>
 
                         <div class="author-info">
                           <div class="author-pic">
                             <img
-                              src="images/person-1.png"
+                              src="images/person-2.png"
                               alt="Maria Jones"
                               class="img-fluid"
                             />
                           </div>
-                          <h3 class="font-weight-bold">Maria Jones</h3>
+                          <h3 class="font-weight-bold">Anaya Sharma</h3>
                           <span class="position d-block mb-3"
-                            >CEO, Co-Founder, XYZ Inc.</span
+                            >Mumbai.</span
                           >
                         </div>
                       </div>
@@ -390,13 +381,7 @@
                       <div class="testimonial-block text-center">
                         <blockquote class="mb-5">
                           <p>
-                            &ldquo;Donec facilisis quam ut purus rutrum
-                            lobortis. Donec vitae odio quis nisl dapibus
-                            malesuada. Nullam ac aliquet velit. Aliquam
-                            vulputate velit imperdiet dolor tempor tristique.
-                            Pellentesque habitant morbi tristique senectus et
-                            netus et malesuada fames ac turpis egestas. Integer
-                            convallis volutpat dui quis scelerisque.&rdquo;
+                            &ldquo;I recently bought a few gadgets from FindOwnn, and I am extremely satisfied with my purchase. The prices were competitive, and the products arrived in perfect condition. The website is very user-friendly and easy to navigate.&rdquo;
                           </p>
                         </blockquote>
 
@@ -408,9 +393,9 @@
                               class="img-fluid"
                             />
                           </div>
-                          <h3 class="font-weight-bold">Maria Jones</h3>
+                          <h3 class="font-weight-bold">Rajesh Kumar</h3>
                           <span class="position d-block mb-3"
-                            >CEO, Co-Founder, XYZ Inc.</span
+                            >Bangalore.</span
                           >
                         </div>
                       </div>
@@ -425,13 +410,7 @@
                       <div class="testimonial-block text-center">
                         <blockquote class="mb-5">
                           <p>
-                            &ldquo;Donec facilisis quam ut purus rutrum
-                            lobortis. Donec vitae odio quis nisl dapibus
-                            malesuada. Nullam ac aliquet velit. Aliquam
-                            vulputate velit imperdiet dolor tempor tristique.
-                            Pellentesque habitant morbi tristique senectus et
-                            netus et malesuada fames ac turpis egestas. Integer
-                            convallis volutpat dui quis scelerisque.&rdquo;
+                            &ldquo;I had a fantastic shopping experience with FindOwnn. The home essentials I ordered were exactly as described and arrived promptly. The customer support team was very responsive and resolved my queries quickly.&rdquo;
                           </p>
                         </blockquote>
 
@@ -443,9 +422,38 @@
                               class="img-fluid"
                             />
                           </div>
-                          <h3 class="font-weight-bold">Maria Jones</h3>
+                          <h3 class="font-weight-bold">Vikram Singh</h3>
                           <span class="position d-block mb-3"
-                            >CEO, Co-Founder, XYZ Inc.</span
+                            >Delhi.</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="item">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8 mx-auto">
+                      <div class="testimonial-block text-center">
+                        <blockquote class="mb-5">
+                          <p>
+                            &ldquo;I've been shopping at FindOwnn for a while now, and I've never been disappointed. The clothing and accessories are stylish and affordable. Plus, the detailed product descriptions and customer reviews make it easy to make informed choices.&rdquo;
+                          </p>
+                        </blockquote>
+
+                        <div class="author-info">
+                          <div class="author-pic">
+                            <img
+                              src="images/person-2.png"
+                              alt="Maria Jones"
+                              class="img-fluid"
+                            />
+                          </div>
+                          <h3 class="font-weight-bold">Neha Gupta</h3>
+                          <span class="position d-block mb-3"
+                            >Jaipur.</span
                           >
                         </div>
                       </div>
