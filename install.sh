@@ -14,23 +14,23 @@ BOLD='\033[1m'
 DIM='\033[2m'
 NC='\033[0m'
 
-info() { echo -e "${BLUE}>${NC} $1"; }
-success() { echo -e "${GREEN}✓${NC} $1"; }
-warn() { echo -e "${YELLOW}!${NC} $1"; }
-error() { echo -e "${RED}✗${NC} $1"; exit 1; }
-step() { echo -e "\n${CYAN}${BOLD}[$1/4]${NC} $2"; }
+info() { echo -e "${BLUE}>${NC} $1" >&2; }
+success() { echo -e "${GREEN}✓${NC} $1" >&2; }
+warn() { echo -e "${YELLOW}!${NC} $1" >&2; }
+error() { echo -e "${RED}✗${NC} $1" >&2; exit 1; }
+step() { echo -e "\n${CYAN}${BOLD}[$1/4]${NC} $2" >&2; }
 
 print_banner() {
-    echo ""
-    echo -e "${CYAN}"
-    cat << 'EOF'
+    echo "" >&2
+    echo -e "${CYAN}" >&2
+    cat >&2 << 'EOF'
     ╦╔═╗╔╗╔╦╔╦╗╔═╗
     ║║ ╦║║║║ ║ ║╣ 
     ╩╚═╝╝╚╝╩ ╩ ╚═╝
 EOF
-    echo -e "${NC}"
-    echo -e "  ${DIM}Run JS/TS microservices in Docker${NC}"
-    echo ""
+    echo -e "${NC}" >&2
+    echo -e "  ${DIM}Run JS/TS microservices in Docker${NC}" >&2
+    echo "" >&2
 }
 
 detect_platform() {
@@ -61,7 +61,7 @@ check_existing() {
         local current
         current=$("$BIN_DIR/ignite" --version 2>/dev/null || echo "unknown")
         warn "Already installed: $current"
-        echo -ne "    Reinstall? [y/N] "
+        echo -ne "    Reinstall? [y/N] " >&2
         read -r reply
         if [[ ! "$reply" =~ ^[Yy]$ ]]; then
             info "Cancelled"
@@ -153,7 +153,7 @@ setup_path() {
 check_docker() {
     if ! command -v docker &> /dev/null; then
         warn "Docker not found (required)"
-        echo -e "    ${DIM}https://docs.docker.com/get-docker/${NC}"
+        echo -e "    ${DIM}https://docs.docker.com/get-docker/${NC}" >&2
         return 1
     fi
     
@@ -169,13 +169,13 @@ print_success() {
     local shell_name="bashrc"
     [ -f "$HOME/.zshrc" ] && shell_name="zshrc"
     
-    echo ""
-    echo -e "${GREEN}${BOLD}  Done!${NC}"
-    echo ""
-    echo -e "  ${DIM}Next steps:${NC}"
-    echo -e "    ${YELLOW}source ~/.$shell_name${NC}  ${DIM}# or restart terminal${NC}"
-    echo -e "    ${YELLOW}ignite init hello && cd hello && ignite run .${NC}"
-    echo ""
+    echo "" >&2
+    echo -e "${GREEN}${BOLD}  Done!${NC}" >&2
+    echo "" >&2
+    echo -e "  ${DIM}Next steps:${NC}" >&2
+    echo -e "    ${YELLOW}source ~/.$shell_name${NC}  ${DIM}# or restart terminal${NC}" >&2
+    echo -e "    ${YELLOW}ignite init hello && cd hello && ignite run .${NC}" >&2
+    echo "" >&2
 }
 
 main() {
