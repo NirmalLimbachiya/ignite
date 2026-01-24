@@ -9,12 +9,29 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+DIM='\033[2m'
 NC='\033[0m'
 
-info() { echo -e "${BLUE}==>${NC} $1"; }
+info() { echo -e "${BLUE}>${NC} $1"; }
 success() { echo -e "${GREEN}✓${NC} $1"; }
 warn() { echo -e "${YELLOW}!${NC} $1"; }
 error() { echo -e "${RED}✗${NC} $1"; exit 1; }
+step() { echo -e "\n${CYAN}${BOLD}[$1/4]${NC} $2"; }
+
+print_banner() {
+    echo ""
+    echo -e "${CYAN}"
+    cat << 'EOF'
+    ╦╔═╗╔╗╔╦╔╦╗╔═╗
+    ║║ ╦║║║║ ║ ║╣ 
+    ╩╚═╝╝╚╝╩ ╩ ╚═╝
+EOF
+    echo -e "${NC}"
+    echo -e "  ${DIM}Run JS/TS microservices in Docker${NC}"
+    echo ""
+}
 
 detect_platform() {
     local os arch
@@ -22,38 +39,59 @@ detect_platform() {
     case "$(uname -s)" in
         Linux*)  os="linux" ;;
         Darwin*) os="darwin" ;;
-        *)       error "Unsupported OS: $(uname -s). Only Linux and macOS are supported." ;;
+        MINGW*|MSYS*|CYGWIN*) error "Windows is not supported. Use WSL2." ;;
+        *)       error "Unsupported OS: $(uname -s)" ;;
     esac
 
     case "$(uname -m)" in
-        x86_64)  arch="x64" ;;
-        amd64)   arch="x64" ;;
-        arm64)   arch="arm64" ;;
-        aarch64) arch="arm64" ;;
-        *)       error "Unsupported architecture: $(uname -m). Only x64 and arm64 are supported." ;;
+        x86_64|amd64)  arch="x64" ;;
+        arm64|aarch64) arch="arm64" ;;
+        *)             error "Unsupported arch: $(uname -m)" ;;
     esac
 
     echo "${os}-${arch}"
 }
 
 get_latest_version() {
-    curl -sL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/'
+    curl -sL "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/'
+}
+
+check_existing() {
+    if [ -f "$BIN_DIR/ignite" ]; then
+        local current
+        current=$("$BIN_DIR/ignite" --version 2>/dev/null || echo "unknown")
+        warn "Already installed: $current"
+        echo -ne "    Reinstall? [y/N] "
+        read -r reply
+        if [[ ! "$reply" =~ ^[Yy]$ ]]; then
+            info "Cancelled"
+            exit 0
+        fi
+    fi
 }
 
 download_binary() {
     local version="$1"
     local platform="$2"
     local url="https://github.com/${REPO}/releases/download/${version}/ignite-${platform}.tar.gz"
-    local tmp_dir=$(mktemp -d)
+    local tmp_dir
+    tmp_dir=$(mktemp -d)
 
-    info "Downloading ignite ${version} for ${platform}..."
-
+    info "URL: ${DIM}$url${NC}"
+    
     if command -v curl &> /dev/null; then
-        curl -fsSL "$url" -o "$tmp_dir/ignite.tar.gz" || error "Download failed. Check if release exists: $url"
+        if ! curl -fSL --progress-bar "$url" -o "$tmp_dir/ignite.tar.gz"; then
+            rm -rf "$tmp_dir"
+            echo ""
+            error "Download failed. Release may not exist.\n    Check: https://github.com/${REPO}/releases"
+        fi
     elif command -v wget &> /dev/null; then
-        wget -q "$url" -O "$tmp_dir/ignite.tar.gz" || error "Download failed. Check if release exists: $url"
+        if ! wget -q --show-progress "$url" -O "$tmp_dir/ignite.tar.gz"; then
+            rm -rf "$tmp_dir"
+            error "Download failed. Check: https://github.com/${REPO}/releases"
+        fi
     else
-        error "Neither curl nor wget found. Please install one of them."
+        error "curl or wget required"
     fi
 
     echo "$tmp_dir"
@@ -63,97 +101,108 @@ install_binary() {
     local tmp_dir="$1"
     local platform="$2"
 
-    info "Installing to ${INSTALL_DIR}..."
-
     mkdir -p "$BIN_DIR"
     mkdir -p "$INSTALL_DIR/runtime-bun"
     mkdir -p "$INSTALL_DIR/runtime-node"
 
+    info "Extracting..."
     tar -xzf "$tmp_dir/ignite.tar.gz" -C "$tmp_dir"
 
     cp "$tmp_dir/ignite-${platform}" "$BIN_DIR/ignite"
     chmod +x "$BIN_DIR/ignite"
 
-    if [ -d "$tmp_dir/runtime-bun" ]; then
-        cp -r "$tmp_dir/runtime-bun/"* "$INSTALL_DIR/runtime-bun/"
-    fi
-    if [ -d "$tmp_dir/runtime-node" ]; then
-        cp -r "$tmp_dir/runtime-node/"* "$INSTALL_DIR/runtime-node/"
-    fi
+    [ -d "$tmp_dir/runtime-bun" ] && cp -r "$tmp_dir/runtime-bun/"* "$INSTALL_DIR/runtime-bun/" 2>/dev/null || true
+    [ -d "$tmp_dir/runtime-node" ] && cp -r "$tmp_dir/runtime-node/"* "$INSTALL_DIR/runtime-node/" 2>/dev/null || true
 
     rm -rf "$tmp_dir"
+    success "Installed to $BIN_DIR/ignite"
 }
 
 setup_path() {
-    local shell_rc=""
-    local path_export="export PATH=\"\$PATH:$BIN_DIR\""
+    local shell_rc path_export
+    path_export="export PATH=\"\$PATH:$BIN_DIR\""
 
-    if [ -n "$ZSH_VERSION" ] || [ -f "$HOME/.zshrc" ]; then
+    if [ -f "$HOME/.zshrc" ]; then
         shell_rc="$HOME/.zshrc"
-    elif [ -n "$BASH_VERSION" ] || [ -f "$HOME/.bashrc" ]; then
+    elif [ -f "$HOME/.bashrc" ]; then
         shell_rc="$HOME/.bashrc"
+    elif [ -f "$HOME/.config/fish/config.fish" ]; then
+        shell_rc="$HOME/.config/fish/config.fish"
+        path_export="set -gx PATH \$PATH $BIN_DIR"
     elif [ -f "$HOME/.profile" ]; then
         shell_rc="$HOME/.profile"
     fi
 
+    if echo "$PATH" | grep -q "$BIN_DIR"; then
+        success "PATH already configured"
+        return
+    fi
+
     if [ -n "$shell_rc" ]; then
         if ! grep -q "$BIN_DIR" "$shell_rc" 2>/dev/null; then
-            echo "" >> "$shell_rc"
-            echo "# Ignite CLI" >> "$shell_rc"
-            echo "$path_export" >> "$shell_rc"
-            info "Added $BIN_DIR to PATH in $shell_rc"
+            echo -e "\n# Ignite CLI\n$path_export" >> "$shell_rc"
+            success "Added to PATH in $(basename "$shell_rc")"
+        else
+            success "PATH configured"
         fi
+    else
+        warn "Add manually: $path_export"
     fi
 }
 
 check_docker() {
     if ! command -v docker &> /dev/null; then
-        warn "Docker not found. Ignite requires Docker for service execution."
-        warn "Install Docker: https://docs.docker.com/get-docker/"
-    else
-        success "Docker found: $(docker --version)"
+        warn "Docker not found (required)"
+        echo -e "    ${DIM}https://docs.docker.com/get-docker/${NC}"
+        return 1
     fi
+    
+    if ! docker info &> /dev/null 2>&1; then
+        warn "Docker not running"
+        return 1
+    fi
+    
+    success "Docker ready"
+}
+
+print_success() {
+    local shell_name="bashrc"
+    [ -f "$HOME/.zshrc" ] && shell_name="zshrc"
+    
+    echo ""
+    echo -e "${GREEN}${BOLD}  Done!${NC}"
+    echo ""
+    echo -e "  ${DIM}Next steps:${NC}"
+    echo -e "    ${YELLOW}source ~/.$shell_name${NC}  ${DIM}# or restart terminal${NC}"
+    echo -e "    ${YELLOW}ignite init hello && cd hello && ignite run .${NC}"
+    echo ""
 }
 
 main() {
-    echo ""
-    echo -e "${BLUE}┌─────────────────────────────────────┐${NC}"
-    echo -e "${BLUE}│${NC}        ${GREEN}Ignite Installer${NC}             ${BLUE}│${NC}"
-    echo -e "${BLUE}└─────────────────────────────────────┘${NC}"
-    echo ""
+    print_banner
 
-    local platform=$(detect_platform)
-    info "Detected platform: $platform"
+    step 1 "Detecting platform"
+    local platform
+    platform=$(detect_platform)
+    success "$platform"
+    
+    check_existing
 
+    step 2 "Fetching version"
     local version="${1:-$(get_latest_version)}"
-    if [ -z "$version" ]; then
-        version="v0.1.0"
-        warn "Could not fetch latest version, using $version"
-    fi
+    [ -z "$version" ] && error "No releases found"
+    success "$version"
 
-    local tmp_dir=$(download_binary "$version" "$platform")
+    step 3 "Installing"
+    local tmp_dir
+    tmp_dir=$(download_binary "$version" "$platform")
     install_binary "$tmp_dir" "$platform"
     setup_path
-    check_docker
 
-    echo ""
-    success "Ignite installed successfully!"
-    echo ""
-    echo "  To get started:"
-    echo ""
-    echo "    1. Restart your terminal or run:"
-    echo "       ${YELLOW}source ~/.bashrc${NC}  (or ~/.zshrc)"
-    echo ""
-    echo "    2. Verify installation:"
-    echo "       ${YELLOW}ignite --version${NC}"
-    echo ""
-    echo "    3. Create your first service:"
-    echo "       ${YELLOW}ignite init my-service${NC}"
-    echo "       ${YELLOW}cd my-service${NC}"
-    echo "       ${YELLOW}ignite run .${NC}"
-    echo ""
-    echo "  Documentation: https://github.com/${REPO}"
-    echo ""
+    step 4 "Checking Docker"
+    check_docker || true
+
+    print_success
 }
 
 main "$@"
