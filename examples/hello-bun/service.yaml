@@ -1,0 +1,8 @@
+service:
+  name: hello-bun
+  runtime: bun
+  entry: index.ts
+  memoryMb: 128
+  timeoutMs: 5000
+  env:
+    NODE_ENV: production

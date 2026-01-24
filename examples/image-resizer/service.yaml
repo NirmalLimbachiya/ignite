@@ -1,0 +1,8 @@
+service:
+  name: image-resizer
+  runtime: node
+  entry: index.js
+  memoryMb: 128
+  timeoutMs: 5000
+  env:
+    NODE_ENV: production
