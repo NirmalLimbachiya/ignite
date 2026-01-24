@@ -15,7 +15,13 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ignite/shared": ["packages/shared/src/index.ts"],
+      "@ignite/core": ["packages/core/src/index.ts"],
+      "@ignite/http": ["packages/http/src/index.ts"]
+    }
   },
   "include": [
     "packages/*/src/**/*.ts"

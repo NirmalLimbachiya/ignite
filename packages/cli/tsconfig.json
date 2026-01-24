@@ -2,7 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "noEmit": false,
+    "baseUrl": ".",
+    "paths": {
+      "@ignite/shared": ["../shared/dist/index.d.ts"],
+      "@ignite/core": ["../core/dist/index.d.ts"],
+      "@ignite/http": ["../http/dist/index.d.ts"]
+    }
   },
   "include": ["src/**/*"]
 }
