@@ -1,0 +1,38 @@
+{
+  "name": "ignite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Bun-first local execution framework for JavaScript/TypeScript microservices with pre-execution safety analysis",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "bun run --filter './packages/*' build",
+    "build:binaries": "bun run scripts/build-binaries.ts",
+    "dev": "bun run --filter './packages/*' dev",
+    "clean": "bun run --filter './packages/*' clean && rm -rf bin dist",
+    "typecheck": "tsc --noEmit",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest --runInBand",
+    "test:unit": "NODE_OPTIONS='--experimental-vm-modules' jest --testPathIgnorePatterns=docker-execution --testPathIgnorePatterns=server",
+    "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch",
+    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage --runInBand"
+  },
+  "devDependencies": {
+    "@elysiajs/cors": "^1.4.1",
+    "@jest/globals": "^30.2.0",
+    "@types/bun": "latest",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.10.0",
+    "elysia": "^1.4.22",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  },
+  "dependencies": {
+    "zario": "^0.4.5"
+  }
+}
