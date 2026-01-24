@@ -1,0 +1,24 @@
+{
+  "name": "@ignite/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "ignite": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "bun run tsc",
+    "dev": "bun run tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@ignite/core": "workspace:*",
+    "@ignite/http": "workspace:*",
+    "@ignite/shared": "workspace:*",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.10.0"
+  }
+}
