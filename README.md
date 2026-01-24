@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/ignite.jpg" alt="Ignite" width="200" />
+  <img src="./assets/logo.png" alt="Ignite" width="120" />
 </p>
 
 <h1 align="center">Ignite</h1>
