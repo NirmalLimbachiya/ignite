@@ -56,7 +56,7 @@ Ignite is a **Bun-first execution framework** that runs your JavaScript/TypeScri
 
 ```bash
 # One-liner (Mac & Linux)
-curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/master/install.sh | bash
 
 # Or download from releases
 # https://github.com/dev-dami/ignite/releases

@@ -10,7 +10,7 @@ Get your first microservice running in under 5 minutes.
 ## Installation
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/master/install.sh | bash
 ```
 
 Verify installation:

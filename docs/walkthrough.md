@@ -333,7 +333,7 @@ Response:
 Download the pre-built binary for your platform:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/master/install.sh | bash
 ```
 
 ### Option 2: Docker Compose
