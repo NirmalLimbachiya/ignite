@@ -93,9 +93,41 @@ ignite run .
 |---------|-------------|
 | `ignite init <name>` | Create new service |
 | `ignite run <path>` | Execute in Docker |
+| `ignite run <path> --audit` | Execute with security audit |
 | `ignite preflight <path>` | Safety checks |
 | `ignite serve` | HTTP API server |
 | `ignite report <path>` | Execution report |
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
+
+## Security Audit
+
+Run untrusted code safely with `--audit` mode:
+
+```bash
+ignite run ./my-service --audit
+```
+
+**Enforces:**
+- Zero network access
+- Read-only filesystem (except `/tmp`)
+- Dropped Linux capabilities
+- No privilege escalation
+
+**Reports violations:**
+```
+SECURITY AUDIT
+
+  Network
+    ✗ connect: api.openai.com (blocked)
+
+  Filesystem
+    ✗ write: /app/malicious.txt (blocked)
+
+✗ Security Status: 2 VIOLATION(S) BLOCKED
+```
+
+Perfect for **AI agent sandboxing**, student code execution, or CI security checks.
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
 

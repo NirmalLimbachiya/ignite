@@ -85,7 +85,8 @@ ignite run <path> [options]
 |--------|---------|-------------|
 | `--input <json>` | `{}` | Input data as JSON string |
 | `--skip-preflight` | `false` | Skip safety checks |
-| `--verbose` | `false` | Verbose output |
+| `--json` | `false` | Output results as JSON |
+| `--audit` | `false` | Run with security audit (blocks network, read-only filesystem) |
 
 **Examples:**
 
@@ -99,8 +100,40 @@ ignite run ./my-service --input '{"name": "World"}'
 # Skip preflight (development only)
 ignite run ./my-service --skip-preflight
 
-# Verbose output
-ignite run ./my-service --verbose
+# Security audit mode (for AI agent sandboxing)
+ignite run ./my-service --audit
+```
+
+**Security Audit Mode (`--audit`):**
+
+When running with `--audit`, the service runs in a hardened sandbox:
+
+- Network completely disabled (`--network=none`)
+- Read-only root filesystem (`--read-only`)
+- Writable `/tmp` only (`--tmpfs /tmp`)
+- All Linux capabilities dropped (`--cap-drop=ALL`)
+- No privilege escalation (`--security-opt=no-new-privileges`)
+
+The audit report shows any blocked security violations:
+
+```
+SECURITY AUDIT
+
+Policy:
+  Network: blocked
+  Filesystem: read-only
+  Process spawn: blocked
+
+Events:
+
+Network
+  ✗ connect: api.openai.com (blocked)
+
+Filesystem
+  ✗ write: /app/malicious.txt (blocked)
+
+──────────────────────────────────────────────────
+✗ Security Status: 2 VIOLATION(S) BLOCKED
 ```
 
 **Output:**
@@ -482,6 +515,36 @@ env:
   DB_URL: "${DATABASE_URL}"    # From host environment
   DEBUG: "true"                # Static value
 ```
+
+### ignite.policy.yaml (Security Policy)
+
+Create an `ignite.policy.yaml` file to customize security settings:
+
+```yaml
+security:
+  network:
+    enabled: false              # Block all network (default)
+    allowedHosts:               # Optional: allow specific hosts
+      - api.example.com
+    allowedPorts:               # Optional: allow specific ports
+      - 443
+
+  filesystem:
+    readOnly: true              # Read-only root filesystem
+    allowedWritePaths:          # Paths that can be written to
+      - /tmp
+    blockedReadPaths:           # Paths blocked from reading
+      - /etc/passwd
+      - /etc/shadow
+      - /proc
+      - /sys
+
+  process:
+    allowSpawn: false           # Block spawning child processes
+    allowedCommands: []         # Optional: allow specific commands
+```
+
+The policy file is automatically loaded when using `--audit` mode.
 
 ### Memory Guidelines
 
