@@ -125,24 +125,33 @@ run_menu() {
     local num_options=2
     [ -n "$installed_version" ] && num_options=4
     
+    # Check if we can access /dev/tty for interactive input
+    if ! exec 3</dev/tty 2>/dev/null; then
+        echo -e "  ${YELLOW}!${NC} Non-interactive mode detected, auto-installing..." >&2
+        do_install
+        return
+    fi
+    
     hide_cursor
-    trap 'show_cursor' EXIT
+    trap 'show_cursor; exec 3<&-' EXIT
     
     while true; do
         print_banner
         print_status
         show_menu $selected
         
-        read -rsn1 key
+        # Read from /dev/tty (fd 3) instead of stdin
+        read -rsn1 key <&3
         
         if [[ $key == $'\x1b' ]]; then
-            read -rsn2 key
+            read -rsn2 key <&3
             case $key in
                 '[A') ((selected > 0)) && ((selected--)) ;;
                 '[B') ((selected < num_options - 1)) && ((selected++)) ;;
             esac
         elif [[ $key == "" ]]; then
             show_cursor
+            exec 3<&-
             handle_selection $selected "$installed_version"
             return
         fi

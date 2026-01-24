@@ -39,6 +39,21 @@ handler(input)
   });
 `;
 
+function getPackageJsonTemplate(serviceName: string, runtime: RuntimeName): string {
+  const entry = runtime === 'bun' ? 'index.ts' : 'index.js';
+  return JSON.stringify({
+    name: serviceName,
+    version: '1.0.0',
+    type: 'module',
+    main: entry,
+    scripts: {
+      start: runtime === 'bun' ? `bun run ${entry}` : `node ${entry}`,
+      preflight: 'ignite preflight .',
+      run: 'ignite run .'
+    }
+  }, null, 2) + '\n';
+}
+
 const BUN_INDEX_TEMPLATE = `interface Event {
   [key: string]: unknown;
 }
@@ -87,6 +102,7 @@ export async function initCommand(serviceName: string, options: InitOptions): Pr
     await mkdir(absolutePath, { recursive: true });
 
     await writeFile(join(absolutePath, 'service.yaml'), getServiceYamlTemplate(serviceName, runtime));
+    await writeFile(join(absolutePath, 'package.json'), getPackageJsonTemplate(serviceName, runtime));
     await writeFile(join(absolutePath, entryFile), indexTemplate);
 
     logger.success(`Initialized ${runtime} service "${serviceName}" at ${absolutePath}`);
