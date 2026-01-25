@@ -6,6 +6,8 @@ import type { LoadedService } from '../service/service.types.js';
 import { dockerBuild, dockerRun, isDockerAvailable } from '../runtime/docker-runtime.js';
 import { getRuntimeConfig } from '../runtime/runtime-registry.js';
 import { parseMetrics } from './metrics.js';
+import { DEFAULT_POLICY, loadPolicyFile, policyToDockerOptions } from '../security/index.js';
+import type { SecurityPolicy } from '../security/security.types.js';
 
 
 
@@ -14,6 +16,7 @@ export interface ExecuteOptions {
   env?: Record<string, string>;
   skipBuild?: boolean;
   audit?: boolean;
+  policy?: SecurityPolicy;
 }
 
 interface ExecutionState {
@@ -45,6 +48,13 @@ export async function executeService(
 
   logger.info(`Executing ${serviceName}...`);
 
+  let policy: SecurityPolicy | undefined;
+  if (options.audit) {
+    policy = options.policy ?? (await loadPolicyFile(service.servicePath)) ?? DEFAULT_POLICY;
+  }
+
+  const securityOptions = policy ? policyToDockerOptions(policy) : undefined;
+
   const runResult = await dockerRun({
     imageName,
     containerName,
@@ -65,13 +75,7 @@ export async function executeService(
       IGNITE_INPUT: options.input ? JSON.stringify(options.input) : '',
       NODE_ENV: 'production',
     },
-    security: options.audit ? {
-      networkDisabled: true,
-      readOnlyRootfs: true,
-      dropCapabilities: true,
-      noNewPrivileges: true,
-      tmpfsPaths: ['/tmp'],
-    } : undefined,
+    security: options.audit ? securityOptions : undefined,
   });
 
   const metrics = parseMetrics(runResult, isColdStart);
